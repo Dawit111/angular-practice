@@ -1,0 +1,23 @@
+<div class="row">
+ <div color="red" class="col-12">
+    <table class="table table-borderd">
+        <thead>
+            <tr>
+                <th>
+                    id
+                </th>
+                <td>
+                    name
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+   <tr *ngFor="let role of roleList">
+<td>{{role.roleId}}</td>
+<td>{{role.role}}</td>
+</tr>
+        </tbody>
+    </table>
+
+ </div>
+</div>
