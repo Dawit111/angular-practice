@@ -40,6 +40,11 @@ export class ClientComponent implements OnInit {
       }
     })
   }
+
+  onEdit(data: Client) {
+    this.clientObj = data
+  }
+
   onDelete(id: number) {
     const isDelete = confirm("sure delete ?")
     if(isDelete) {
