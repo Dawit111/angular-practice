@@ -1,19 +1,22 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
 import { ApiResponseModel, IEmployee } from '../../model/interface/role';
 import { Client } from '../../model/class/Client';
+import { DatePipe } from '@angular/common';
+import { AlertComponent } from "../../reusableComponent/alert/alert.component";
 
 @Component({
   selector: 'app-client-project',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, DatePipe, AlertComponent],
   templateUrl: './client-project.component.html',
   styleUrl: './client-project.component.css'
 })
 export class ClientProjectComponent implements OnInit {
   employeeList : IEmployee[] = []
   clientList : Client[] =[]
+  projectList = signal<any[]>([])
   clientService = inject(ClientService)
  
 projectForm : FormGroup = new FormGroup({
@@ -35,6 +38,7 @@ projectForm : FormGroup = new FormGroup({
 ngOnInit(): void {
       this.getALLEmployee()
       this.getALLClients()
+      this.getAllClientProject()
   }
 
   getALLEmployee () {
@@ -47,7 +51,11 @@ ngOnInit(): void {
     this.clientList = res.data
     })
   }
-
+  getAllClientProject () {
+    this.clientService.getAllClientProjects().subscribe((res: ApiResponseModel) => {
+    this.projectList.set(res.data)
+    })
+  }
   onSaveProject () {
     const formValue = this.projectForm.value
 

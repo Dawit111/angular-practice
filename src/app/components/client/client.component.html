@@ -1,3 +1,4 @@
+<app-alert [alertType]="'Success'" [alertMessage]="'Client saved successfully'"></app-alert>
 <div class="row">
     <div class="col-8">
         <div class="card">
@@ -119,8 +120,10 @@
                         <button class="btn btn-secondary">Reset</button>
                     </div>
                     <div class="col-6  text-center">
-                        <button class="btn btn-success" [disabled]="!form.valid" (click)="onSaveClient()">{{clientObj.clientId==0 ? "Save Client"
-                            : "Update Client"}}</button>
+                        <app-my-button (onButtonClicked)="onSaveClient($event)" [btnText]="clientObj.clientId==0 ? 'Save Client'
+                            : 'Update Client'" [btnClass]="'btn btn-success'"></app-my-button>
+                        <!-- <button class="btn btn-success" [disabled]="!form.valid" (click)="onSaveClient()">{{clientObj.clientId==0 ? "Save Client"
+                            : "Update Client"}}</button> -->
                     </div>
 
                 </div>

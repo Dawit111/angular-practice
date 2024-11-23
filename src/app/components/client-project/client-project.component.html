@@ -1,3 +1,5 @@
+<app-alert [alertType]="'Error'" [alertMessage]="'Operation failed'"></app-alert>
+
 <div class="row">
     <div class="col-8">
         <div class="card">
@@ -12,9 +14,12 @@
                                 <tr>
                                     <th>Sr No </th>
                                     <th>Person Name</th>
-                                    <th>Company Name</th>
-                                    <th>Contact No</th>
-                                    <th>City</th>
+                                    <th>Project Name</th>
+                                    <th>Emp Name</th>
+
+                                    <th>Contact Person Name</th>
+                                    <th>Start Date</th>
+
                                     <th>Actions</th>
                                     <!-- <th>State</th>
                                     <th>Pin code</th>
@@ -26,14 +31,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for (client of clientList; track $index) {
+                                @for (item of projectList(); track $index) {
                                 <tr>
                                     <td>{{$index+1}}</td>
-                                    <td>{{client.contactPersonName}}</td>
-                                    <td>{{client.companyName}}</td>
-                                    <td>{{client.contactNo}}</td>
-                                    <td>{{client.city}}</td>
-                                    <td>
+                                    <td>{{item.clientName}}</td>
+                                    <td>{{item.projectName}}</td>
+                                    <td>{{item.empName}}</td>
+                                    <td>{{item.contactPersonName}}</td>
+                                    <td>{{item.startDate | date : 'dd-MMM-yyyy'}}</td>
+
+                                    <td> 
                                         <button style class="btn btn-primary"> Edit </button>
                                         <button class="btn btn-danger">Delete</button>
                                     </td>
@@ -58,7 +65,7 @@
                             <label for="">Project Name</label>
                             <input type="text" class="form-control" formControlName="projectName">
                             @if (projectForm.controls['projectName'].touched) {
-                                <div class="text-danger">
+                            <div class="text-danger">
                                 @if (projectForm.controls['projectName'].errors?.['required']) {
 
                                 <span>This is required</span>
@@ -68,9 +75,9 @@
                                 <span>Min 4 chars needed</span>
                                 }
 
-                            </div>   
+                            </div>
                             }
-                         
+
 
                         </div>
                         <div class="col-6">

@@ -5,6 +5,7 @@ import { Client } from '../model/class/Client';
 import { environment } from '../../environments/environment.development';
 import { ApiResponseModel } from '../model/interface/role';
 import { Project } from '../model/class/project';
+import { Constant } from '../constant/Constant';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,15 @@ export class ClientService {
   constructor(private http: HttpClient) { }
 
   getAllClients(): Observable<ApiResponseModel> {
-    return this.http.get<ApiResponseModel>(environment.API_URL + "GetAllClients")
+    return this.http.get<ApiResponseModel>(environment.API_URL + Constant.API_URL.GET_ALL_CLIENT)
   }
 
   getAllEmployee(): Observable<ApiResponseModel> {
-    return this.http.get<ApiResponseModel>(environment.API_URL + "GetAllEmployee")
+    return this.http.get<ApiResponseModel>(environment.API_URL + Constant.API_URL.GET_ALL_EMP)
   }
-
+  getAllClientProjects(): Observable<ApiResponseModel> {
+    return this.http.get<ApiResponseModel>(environment.API_URL + Constant.API_URL.GET_ALL_PROJECT)
+  }
   addUpdate(obj: Client): Observable<ApiResponseModel> {
     return this.http.post<ApiResponseModel>(environment.API_URL + "AddUpdateClient", obj)
   }
